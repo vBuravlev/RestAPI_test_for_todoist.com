@@ -12,7 +12,7 @@
 >
 >  :heavy_check_mark: [Тестовые проверки API](#clipboard-тестовые-проверки-api)
 >
->  :heavy_check_mark: [Запуск тестов из терминала](#computer-Запуск-тестов-из-терминала)
+>  :heavy_check_mark: [Запуск тестов из терминала](#computer-запуск-тестов-из-терминала)
 >
 >  :heavy_check_mark: [Запуск тестов в Jenkins](#computer-запуск-тестов-в-jenkins)
 >
@@ -79,7 +79,7 @@
 >
 > <code>TASK</code> – название таски для запуска (_по умолчанию - <code>test</code>_).
 
-## <img width="4%" title="Jenkins" src="images/logo/Jenkins.svg"> Запуск тестов в [Jenkins]([https://jenkins.autotests.cloud/job/tionix_web/](https://jenkins.autotests.cloud/job/todoist_API_test/))
+## <img width="4%" title="Jenkins" src="images/logo/Jenkins.svg"> Запуск тестов в [Jenkins]([https://jenkins.autotests.cloud/job/todoist_API_test/](https://jenkins.autotests.cloud/job/todoist_API_test/))
 *Для запуска сборки необходимо указать значения параметров и нажать кнопку <code><strong>*Собрать*</strong></code>.*
 
 <p align="center">
@@ -146,7 +146,7 @@ TestOps*</strong></code>, кликнув по которым, откроется
 <img title="Telegram Notifications" src="images/screens/TelegramBot2.png">
 </p>
 
-## <img width="4%" title="Selenoid" src="images/logo/Selenoid.svg"> Пример запуска теста в Selenoid
+## Пример визуального отображения работы API тестов в GUI
 
 <p align="center">
   <img title="Selenoid Video" src="images/gif/Video-Test.gif">
