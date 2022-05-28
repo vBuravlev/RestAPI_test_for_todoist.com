@@ -1,7 +1,7 @@
 package api;
 
 import api.config.Project;
-import api.helpers.HelperParameters;
+
 import api.helpers.Cleaner;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;

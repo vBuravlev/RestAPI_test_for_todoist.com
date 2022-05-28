@@ -11,7 +11,7 @@ import static api.specifications.Specification.responseSpec204;
 import static io.restassured.RestAssured.given;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-public class DeleteTask {
+public interface DeleteTask {
 
     @Step("Отправка запроса на удаление задачи")
     public static void deleteTask(long taskId) {
@@ -35,7 +35,4 @@ public class DeleteTask {
 
 
     }
-
-
-
 }

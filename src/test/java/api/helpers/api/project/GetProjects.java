@@ -3,13 +3,13 @@ package api.helpers.api.project;
 import api.dictonary.DictonaryApiV1;
 import api.domain.ProjectData;
 import io.qameta.allure.Step;
+
 import java.util.List;
 
 import static api.specifications.Specification.*;
 import static io.restassured.RestAssured.given;
 
-public class GetProjects {
-
+public interface GetProjects {
     @Step("Отправляем запрос на получение массива проектов")
     public static ProjectData[] getProjectArray() {
         return given()
@@ -53,6 +53,5 @@ public class GetProjects {
                 .spec(responseSpec404)
                 .extract().as(ProjectData.class);
     }
-
 
 }

@@ -8,7 +8,7 @@ import java.util.List;
 import static api.specifications.Specification.*;
 import static io.restassured.RestAssured.given;
 
-public class GetActiveTasks {
+public interface GetActiveTasks {
 
     @Step("Отправляем запрос на получение списка проектов в виде массива")
     public static TaskData[] getTaskArray() {
@@ -65,6 +65,5 @@ public class GetActiveTasks {
 
         return taskData;
     }
-
 
 }
