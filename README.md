@@ -6,6 +6,8 @@
   <img src="images/screens/Todoist.png" alt="job" width="800">
 </p>
 
+**Проект имеет полноценное описание REST API [Open Api todoist.com](https://developer.todoist.com/rest/v1/#adding-a-new-project)**
+
 ## :notebook:	Содержание
 
 >  :heavy_check_mark: [Технологии и инструменты](#computer-технологии-и-инструменты)
@@ -63,7 +65,7 @@
 
 ### Локальный запуск тестов
 
-*Пример конфигурационного файла для локального запуска из терминала находится в resourse/config/credentional_example.properties*
+*Пример конфигурационного файла для локального запуска из терминала находится в resourse/config/credential_example.properties*
 
 ```bash
 ./gradlew clean test
