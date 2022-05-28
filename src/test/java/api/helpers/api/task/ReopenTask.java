@@ -10,7 +10,7 @@ import static io.restassured.RestAssured.given;
 public class ReopenTask {
 
     @Step("Отправляем запрос на переоткрытие задачи")
-    public static void reopenTask(String taskId) {
+    public static void reopenTask(long taskId) {
 
         given()
                 .spec(requestSpec)

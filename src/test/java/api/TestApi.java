@@ -4,6 +4,7 @@ import api.dictonary.DictonaryLanguage;
 import api.dictonary.DictonaryPriority;
 import api.domain.ProjectData;
 import api.domain.TaskData;
+import api.helpers.Cleaner;
 import api.helpers.FakerHelper;
 import api.helpers.api.project.ChekProject;
 import api.helpers.api.project.CreateNewProject;
@@ -17,7 +18,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class TestApi extends TestBase implements ChekProject, CheckTask, FakerHelper {
+public class TestApi extends TestBase implements ChekProject, CheckTask, FakerHelper, Cleaner {
 
     @Test
     @DisplayName("Создание нового проекта")
@@ -85,18 +86,20 @@ public class TestApi extends TestBase implements ChekProject, CheckTask, FakerHe
     public void closeAndReopenTask() {
 
         //Создаем задачу и проверяем,что она создалась с нужными параметрами
-        String taskContent = FakerHelper.createRandomName(5);
-        String taskDeadLine = "tomorrow at 12:00";
-        TaskData taskData = CreateNewTask.createNewTask(DictonaryLanguage.EN.getPathApi(), taskContent, DictonaryPriority.FOUR.getPathApi(), taskDeadLine);
-        assertThat(GetActiveTasks.getTask(taskData.getId()).getContent()).isEqualTo(taskContent);
-        assertThat(GetActiveTasks.getTask(taskData.getId()).getDue().getString()).isEqualTo(taskDeadLine);
+        String taskContentExpect = FakerHelper.createRandomName(5);
+        String taskDeadLineExpect = "tomorrow at 12:00";
+        TaskData taskData = CreateNewTask.createNewTask(DictonaryLanguage.EN.getPathApi(), taskContentExpect, DictonaryPriority.FOUR.getPathApi(), taskDeadLineExpect);
+        String taskContent = GetActiveTasks.getTask(taskData.getId()).getContent();
+        String taskDead = GetActiveTasks.getTask(taskData.getId()).getDue().getString();
+        assertThat(taskContent).isEqualTo(taskContentExpect);
+        assertThat(taskDead).isEqualTo(taskDeadLineExpect);
 
         //Закрываем задачу
-        CloseTask.closeTask(String.valueOf(taskData.getId()));
+        CloseTask.closeTask(taskData.getId());
         CheckTask.checkStatusTask(taskData.getId(), true);
 
         //Переоткрываем задачу
-        ReopenTask.reopenTask(String.valueOf(taskData.getId()));
+        ReopenTask.reopenTask(taskData.getId());
         CheckTask.checkStatusTask(taskData.getId(), false);
     }
 
@@ -107,14 +110,17 @@ public class TestApi extends TestBase implements ChekProject, CheckTask, FakerHe
     @Tag("API")
     public void createPlentyTask() {
 
-        //Задаем дедлайн для выполнения задач
-        String taskDeadLine = "tomorrow at 12:00";
         //Задаем нужно количество задач
         int quantityTaskMax = 20;
 
         //Создаем заданное количество задач
         for (int quantityTasks = 0; quantityTasks < quantityTaskMax; quantityTasks++) {
-            TaskData taskData = CreateNewTask.createNewTask(DictonaryLanguage.EN.getPathApi(), FakerHelper.createRandomName(5) + quantityTasks, DictonaryPriority.FOUR.getPathApi(), taskDeadLine);
+            String lang = DictonaryLanguage.EN.getPathApi();
+            String content = FakerHelper.createRandomName(10);
+            int priority = DictonaryPriority.FOUR.getPathApi();
+            String taskDeadLine = "tomorrow at 12:00";
+
+            TaskData taskData = CreateNewTask.createNewTask(lang, content , priority, taskDeadLine);
             CheckTask.checkContentTask(taskData.getContent());
         }
 
@@ -123,7 +129,8 @@ public class TestApi extends TestBase implements ChekProject, CheckTask, FakerHe
         Assertions.assertThat(quantityTasksList).isEqualTo(quantityTaskMax);
 
         //Удаляем одну рандомную задачу из списка и проверяем, что она удалена
-        DeleteTask.deleteTask(String.valueOf(GetActiveTasks.getTaskList().get(FakerHelper.createRandomInt(quantityTaskMax)).getId()));
+        long taskId = GetActiveTasks.getTaskList().get(FakerHelper.createRandomInt(quantityTaskMax)).getId();
+        DeleteTask.deleteTask(taskId);
         assertThat(GetActiveTasks.getTaskList().size()).isEqualTo(quantityTasksList - 1);
 
     }
