@@ -63,7 +63,7 @@
 
 ### Локальный запуск тестов
 
-*Пример конфигурационного файла для локального запуска из терминала находится в resourse/config/credentional_example.properties*
+*Пример конфигурационного файла для локального запуска из терминала находится в resourse/config/credential_example.properties*
 
 ```bash
 ./gradlew clean test
