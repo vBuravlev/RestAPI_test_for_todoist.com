@@ -17,7 +17,9 @@ public interface Cleaner {
         DeleteTask.deleteAllTask();
 
         //Проверяем, что очистка прошла успешно
-        assertThat(GetProjects.getProjectList().size()).isEqualTo(1);
-        assertThat(GetActiveTasks.getTaskList().size()).isEqualTo(0);
+        int sizeProjectList = GetProjects.getProjectList().size();
+        int sizeTaskList = GetActiveTasks.getTaskList().size();
+        assertThat(sizeProjectList).isEqualTo(1);
+        assertThat(sizeTaskList).isEqualTo(0);
     }
 }

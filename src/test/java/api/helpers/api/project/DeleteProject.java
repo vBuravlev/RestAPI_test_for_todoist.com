@@ -3,15 +3,16 @@ package api.helpers.api.project;
 import api.dictonary.DictonaryApiV1;
 import api.domain.ProjectData;
 import io.qameta.allure.Step;
+
 import java.util.List;
 
 import static api.specifications.Specification.*;
 import static io.restassured.RestAssured.given;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-public class DeleteProject {
-
+public interface DeleteProject {
     @Step("Отправляем запрос на удаление проекта")
-    public static void deleteProject(String projectId) {
+    public static void deleteProject(long projectId) {
         given()
                 .spec(requestSpec)
                 .when()
@@ -26,9 +27,8 @@ public class DeleteProject {
         List<ProjectData> projectsData = GetProjects.getProjectList();
         if (projectsData.size() > 1) {
             for (ProjectData projectData : projectsData) {
-                DeleteProject.deleteProject(String.valueOf(projectData.getId()));
+                DeleteProject.deleteProject(projectData.getId());
             }
         }
     }
-
 }

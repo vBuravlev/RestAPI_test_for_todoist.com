@@ -6,10 +6,10 @@ import io.qameta.allure.Step;
 import static api.specifications.Specification.*;
 import static io.restassured.RestAssured.given;
 
-public class CloseTask {
+public interface CloseTask {
 
     @Step("Отправляем запрос на закрытие задачи")
-    public static void closeTask(String taskId) {
+    public static void closeTask(long taskId) {
 
         given()
                 .spec(requestSpec)

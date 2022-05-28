@@ -4,8 +4,6 @@ import api.dictonary.DictonaryApiV1;
 import api.domain.Due;
 import api.domain.TaskCreator;
 import api.domain.TaskData;
-import api.helpers.FakerHelper;
-import api.helpers.WriterHelper;
 import io.qameta.allure.Step;
 
 import static api.helpers.WriterHelper.writerMapper;
@@ -14,7 +12,7 @@ import static api.specifications.Specification.responseSpec200;
 import static io.restassured.RestAssured.given;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class CreateNewTask implements FakerHelper, WriterHelper {
+public interface CreateNewTask {
 
     @Step("Создаем новую задачу в проекте")
     public static TaskData createNewTaskInProject(String lang, String content, int priority, String deadLine, long projectId) {
@@ -74,7 +72,6 @@ public class CreateNewTask implements FakerHelper, WriterHelper {
 
         TaskData taskData = given()
                 .spec(requestSpec)
-//                .body(writerMapper(taskCreatorEx))
                 .body(taskCreatorEx)
                 .when()
                 .post(DictonaryApiV1.TASKS.getPathApi())
@@ -91,7 +88,6 @@ public class CreateNewTask implements FakerHelper, WriterHelper {
 
         return taskData;
     }
-
 
 
 }

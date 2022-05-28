@@ -7,10 +7,10 @@ import static api.specifications.Specification.requestSpec;
 import static api.specifications.Specification.responseSpec204;
 import static io.restassured.RestAssured.given;
 
-public class ReopenTask {
+public interface ReopenTask {
 
     @Step("Отправляем запрос на переоткрытие задачи")
-    public static void reopenTask(String taskId) {
+    public static void reopenTask(long taskId) {
 
         given()
                 .spec(requestSpec)
@@ -20,5 +20,4 @@ public class ReopenTask {
                 .spec(responseSpec204);
 
     }
-
 }

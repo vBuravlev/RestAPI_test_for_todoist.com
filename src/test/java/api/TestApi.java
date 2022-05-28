@@ -5,9 +5,7 @@ import api.dictonary.DictonaryPriority;
 import api.domain.ProjectData;
 import api.domain.TaskData;
 import api.helpers.FakerHelper;
-import api.helpers.api.project.ChekProject;
-import api.helpers.api.project.CreateNewProject;
-import api.helpers.api.project.UpdateProject;
+import api.helpers.api.project.*;
 import api.helpers.api.task.*;
 import io.qameta.allure.Owner;
 import org.assertj.core.api.Assertions;
@@ -17,7 +15,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class TestApi extends TestBase implements ChekProject, CheckTask, FakerHelper {
+public class TestApi extends TestBase {
 
     @Test
     @DisplayName("Создание нового проекта")
@@ -88,15 +86,17 @@ public class TestApi extends TestBase implements ChekProject, CheckTask, FakerHe
         String taskContent = FakerHelper.createRandomName(5);
         String taskDeadLine = "tomorrow at 12:00";
         TaskData taskData = CreateNewTask.createNewTask(DictonaryLanguage.EN.getPathApi(), taskContent, DictonaryPriority.FOUR.getPathApi(), taskDeadLine);
-        assertThat(GetActiveTasks.getTask(taskData.getId()).getContent()).isEqualTo(taskContent);
-        assertThat(GetActiveTasks.getTask(taskData.getId()).getDue().getString()).isEqualTo(taskDeadLine);
+        String taskNewContent = GetActiveTasks.getTask(taskData.getId()).getContent();
+        String taskNewDeadline = GetActiveTasks.getTask(taskData.getId()).getDue().getString();
+        assertThat(taskNewContent).isEqualTo(taskContent);
+        assertThat(taskNewDeadline).isEqualTo(taskDeadLine);
 
         //Закрываем задачу
-        CloseTask.closeTask(String.valueOf(taskData.getId()));
+        CloseTask.closeTask(taskData.getId());
         CheckTask.checkStatusTask(taskData.getId(), true);
 
         //Переоткрываем задачу
-        ReopenTask.reopenTask(String.valueOf(taskData.getId()));
+        ReopenTask.reopenTask(taskData.getId());
         CheckTask.checkStatusTask(taskData.getId(), false);
     }
 
@@ -107,15 +107,19 @@ public class TestApi extends TestBase implements ChekProject, CheckTask, FakerHe
     @Tag("API")
     public void createPlentyTask() {
 
-        //Задаем дедлайн для выполнения задач
-        String taskDeadLine = "tomorrow at 12:00";
         //Задаем нужно количество задач
         int quantityTaskMax = 20;
 
         //Создаем заданное количество задач
         for (int quantityTasks = 0; quantityTasks < quantityTaskMax; quantityTasks++) {
-            TaskData taskData = CreateNewTask.createNewTask(DictonaryLanguage.EN.getPathApi(), FakerHelper.createRandomName(5) + quantityTasks, DictonaryPriority.FOUR.getPathApi(), taskDeadLine);
-            CheckTask.checkContentTask(taskData.getContent());
+            String lang = DictonaryLanguage.EN.getPathApi();
+            String randomContent = FakerHelper.createRandomName(5) + quantityTasks;
+            int priority =  DictonaryPriority.FOUR.getPathApi();
+            String taskDeadLine = "tomorrow at 12:00";
+
+            TaskData taskData = CreateNewTask.createNewTask(lang, randomContent , priority, taskDeadLine);
+            String contentExpect = GetActiveTasks.getTask(taskData.getId()).getContent();
+            CheckTask.checkContentTask(contentExpect);
         }
 
         //Проверяем, что создано заданное количество задач и проверяем
@@ -123,8 +127,11 @@ public class TestApi extends TestBase implements ChekProject, CheckTask, FakerHe
         Assertions.assertThat(quantityTasksList).isEqualTo(quantityTaskMax);
 
         //Удаляем одну рандомную задачу из списка и проверяем, что она удалена
-        DeleteTask.deleteTask(String.valueOf(GetActiveTasks.getTaskList().get(FakerHelper.createRandomInt(quantityTaskMax)).getId()));
-        assertThat(GetActiveTasks.getTaskList().size()).isEqualTo(quantityTasksList - 1);
+        int randomTaskInList = FakerHelper.createRandomInt(quantityTaskMax);
+        long randomTaskID = GetActiveTasks.getTaskList().get(randomTaskInList).getId();
+        DeleteTask.deleteTask(randomTaskID);
+        int sizeListTask = GetActiveTasks.getTaskList().size();
+        assertThat(sizeListTask).isEqualTo(quantityTasksList - 1);
 
     }
 

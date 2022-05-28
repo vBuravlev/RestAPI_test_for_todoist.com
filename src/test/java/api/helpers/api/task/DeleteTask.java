@@ -11,10 +11,10 @@ import static api.specifications.Specification.responseSpec204;
 import static io.restassured.RestAssured.given;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-public class DeleteTask {
+public interface DeleteTask {
 
     @Step("Отправка запроса на удаление задачи")
-    public static void deleteTask(String taskId) {
+    public static void deleteTask(long taskId) {
         given()
                 .spec(requestSpec)
                 .when()
@@ -29,13 +29,10 @@ public class DeleteTask {
         List<TaskData> tasksData = GetActiveTasks.getTaskList();
         if (tasksData.size() > 0) {
             for (TaskData taskData : tasksData) {
-                DeleteTask.deleteTask(String.valueOf(taskData.getId()));
+                DeleteTask.deleteTask(taskData.getId());
             }
         }
 
 
     }
-
-
-
 }

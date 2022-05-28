@@ -23,15 +23,16 @@ public interface CheckTask {
         GetActiveTasks.getTask404(taskId);
     }
 
-
     @Step("Отправляем запрос на проверку статуса задачи")
-    public static void checkStatusTask(long taskId, boolean bool) {
-        assertThat(GetActiveTasks.getTask(taskId).isCompleted()).isEqualTo(bool);
+    public static void checkStatusTask(long taskId, boolean statusExpect) {
+        boolean taskStatus = GetActiveTasks.getTask(taskId).isCompleted();
+        assertThat(taskStatus).isEqualTo(statusExpect);
     }
 
     @Step("Отправляем запрос на проверку контента задачи")
-    public static void checkContentTask(long taskId, String content) {
-        assertThat(GetActiveTasks.getTask(taskId).getContent()).isEqualTo(content);
+    public static void checkContentTask(long taskId, String contentExpect) {
+        String taskContent = GetActiveTasks.getTask(taskId).getContent();
+        assertThat(taskContent).isEqualTo(contentExpect);
     }
 
 }

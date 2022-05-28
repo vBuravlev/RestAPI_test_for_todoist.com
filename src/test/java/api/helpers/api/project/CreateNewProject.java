@@ -9,7 +9,7 @@ import static api.specifications.Specification.responseSpec200;
 import static io.restassured.RestAssured.given;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-public class CreateNewProject {
+public interface CreateNewProject {
 
     @Step("Отправляем запрос на создание проекта")
     public static ProjectData createProject (String projectName) {
@@ -31,6 +31,4 @@ public class CreateNewProject {
         return projectData;
 
     }
-
-
 }

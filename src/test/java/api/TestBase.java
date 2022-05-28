@@ -1,7 +1,7 @@
 package api;
 
 import api.config.Project;
-import api.helpers.HelperParameters;
+
 import api.helpers.Cleaner;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
@@ -11,7 +11,7 @@ import org.junit.jupiter.api.BeforeEach;
 import static io.restassured.RestAssured.*;
 import static api.listeners.CustomAllureListener.withCustomTemplates;
 
-public class TestBase implements HelperParameters, Cleaner {
+public class TestBase implements Cleaner {
 
     @BeforeAll
     static void beforeAll() {
