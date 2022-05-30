@@ -9,7 +9,6 @@ import io.qameta.allure.Step;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public interface Cleaner {
-
     @Step("Очищаем список проектов и задач")
     public static void clearListTasksAndProjects() {
         //Очищаем все проекты и задачи перед тестом

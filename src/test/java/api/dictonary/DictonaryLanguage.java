@@ -4,14 +4,14 @@ public enum DictonaryLanguage {
     EN("en"),
     RU("ru");
 
-    private String pathApi;
+    private String pathLang;
 
-    DictonaryLanguage (String pathApi) {
-        this.pathApi=pathApi;
+    DictonaryLanguage(String pathApi) {
+        this.pathLang = pathLang;
     }
 
-    public String getPathApi() {
-        return pathApi;
+    public String getPathLang() {
+        return pathLang;
     }
 
 }

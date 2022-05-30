@@ -24,13 +24,13 @@ public interface CreateNewTask {
         TaskData taskDataEx = new TaskData();
         taskDataEx.setContent(content);
         taskDataEx.setPriority(priority);
-        taskDataEx.setProject_id(projectId);
+        taskDataEx.setProjectId(projectId);
         taskDataEx.setDue(dueEx);
 
         TaskCreator taskCreatorEx = new TaskCreator();
         taskCreatorEx.setContent(taskDataEx.getContent());
-        taskCreatorEx.setDue_string(dueEx.getString());
-        taskCreatorEx.setDue_lang(dueEx.getLang());
+        taskCreatorEx.setDueString(dueEx.getString());
+        taskCreatorEx.setDueLang(dueEx.getLang());
         taskCreatorEx.setPriority(taskDataEx.getPriority());
 
         TaskData taskData = given()
@@ -66,8 +66,8 @@ public interface CreateNewTask {
 
         TaskCreator taskCreatorEx = new TaskCreator();
         taskCreatorEx.setContent(taskDataEx.getContent());
-        taskCreatorEx.setDue_string(dueEx.getString());
-        taskCreatorEx.setDue_lang(dueEx.getLang());
+        taskCreatorEx.setDueString(dueEx.getString());
+        taskCreatorEx.setDueLang(dueEx.getLang());
         taskCreatorEx.setPriority(taskDataEx.getPriority());
 
         TaskData taskData = given()

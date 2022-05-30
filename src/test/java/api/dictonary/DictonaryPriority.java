@@ -6,14 +6,14 @@ public enum DictonaryPriority {
     TREE(3),
     FOUR(4);
 
-    private int pathApi;
+    private int pathPrior;
 
-    DictonaryPriority (int pathApi) {
-        this.pathApi=pathApi;
+    DictonaryPriority(int pathApi) {
+        this.pathPrior = pathPrior;
     }
 
-    public int getPathApi() {
-        return pathApi;
+    public int getPathPrior() {
+        return pathPrior;
     }
 
 }

@@ -18,19 +18,12 @@ public class TestBase implements Cleaner {
         filters(withCustomTemplates());
         baseURI = Project.config.urlRestTest();
     }
-
     @BeforeEach
     void beforeEach() {
         Cleaner.clearListTasksAndProjects();
     }
-
     @AfterEach
     void afterEach() {
-        Cleaner.clearListTasksAndProjects();
-    }
-
-    @AfterAll
-    static void afterAll() {
         Cleaner.clearListTasksAndProjects();
     }
 
