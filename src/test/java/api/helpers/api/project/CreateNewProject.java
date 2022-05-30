@@ -2,8 +2,16 @@ package api.helpers.api.project;
 
 import api.dictonary.DictonaryApiV1;
 import api.domain.ProjectData;
+import api.helpers.WriterHelper;
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import io.qameta.allure.Step;
+import io.restassured.response.Response;
 
+import java.io.IOException;
+
+import static api.helpers.WriterHelper.writerMapperProject;
+import static api.helpers.WriterHelper.writerMapperTask;
 import static api.specifications.Specification.requestSpec;
 import static api.specifications.Specification.responseSpec200;
 import static io.restassured.RestAssured.given;
@@ -19,7 +27,7 @@ public interface CreateNewProject {
 
         ProjectData projectData = given()
                 .spec(requestSpec)
-                .body(projectDataCreate)
+                .body(writerMapperProject(projectDataCreate))
                 .when()
                 .post(DictonaryApiV1.PROJECTS.getPathApi())
                 .then()

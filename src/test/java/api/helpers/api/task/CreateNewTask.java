@@ -6,7 +6,8 @@ import api.domain.TaskCreator;
 import api.domain.TaskData;
 import io.qameta.allure.Step;
 
-import static api.helpers.WriterHelper.writerMapper;
+import static api.helpers.WriterHelper.writerMapperProject;
+import static api.helpers.WriterHelper.writerMapperTask;
 import static api.specifications.Specification.requestSpec;
 import static api.specifications.Specification.responseSpec200;
 import static io.restassured.RestAssured.given;
@@ -35,7 +36,7 @@ public interface CreateNewTask {
 
         TaskData taskData = given()
                 .spec(requestSpec)
-                .body(writerMapper(taskCreatorEx))
+                .body(writerMapperTask(taskCreatorEx))
                 .when()
                 .post(DictonaryApiV1.TASKS.getPathApi())
                 .then()
@@ -72,7 +73,7 @@ public interface CreateNewTask {
 
         TaskData taskData = given()
                 .spec(requestSpec)
-                .body(taskCreatorEx)
+                .body(writerMapperTask(taskCreatorEx))
                 .when()
                 .post(DictonaryApiV1.TASKS.getPathApi())
                 .then()

@@ -25,6 +25,7 @@ public class TaskData {
     @JsonProperty("label_ids")
     public ArrayList<Object> labelIds;
     public int priority;
+    @JsonProperty("comment_count")
     public int comment_count;
     public int creator;
     public Date created;
